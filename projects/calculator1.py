@@ -7,28 +7,40 @@ string.digits
 
 num1 = float(input("Enter number: "))
 
-print("Select Operator: ")
-print("Addition(+)")
-print("Subtraction(-)")
-print("Division(/)")
-print("Multiplication(*)")
+while True:
 
-Choice = input("Enter number: ")
+    print("Select Operator: ")
+    print("Addition(+)")
+    print("Subtraction(-)")
+    print("Division(/)")
+    print("Multiplication(*)")
 
-num2 = float(input("Enter another number: "))
+    Choice = input("Enter Operator: ")
+       
 
-    
-def calculate(num1, Choice, num2):
-    if Choice == '+':
-        return num1 + num2 
-    elif Choice == '-':
-        return num1 - num2
-    elif Choice == '/':
-        return num1 / num2
-    elif Choice == '*':
-        return num1 * num2
+    num2 = float(input("Enter another number: "))
+
+
+    def calculate(num1, Choice, num2):
+        if Choice == '+':
+            return num1 + num2 
+        elif Choice == '-':
+            return num1 - num2
+        elif Choice == '/':
+            if num2 == 0:
+                return "Cannot divide by 0"
+            return num1 / num2
+        elif Choice == '*':
+            return num1 * num2
+        else:
+            return "Invalid Input"
+
+    result = calculate(num1, Choice, num2)
+    print("Result: ", result)
+
+    print("Do you want to continue calculating? (y/n)")
+    choice = input("y/n: ")
+    if choice == "y":
+        num1 = result
     else:
-        return "Invalid Input"
-
-result = calculate(num1, Choice, num2)
-print("Result: ", result)
+        break
