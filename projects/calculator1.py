@@ -5,7 +5,12 @@ string.ascii_lowercase
 string.punctuation
 string.digits
 
-num1 = float(input("Enter number: "))
+while True:
+    try:
+        num1 = float(input("Enter number: "))
+        break
+    except ValueError:
+        print("Wrong input. Enter number")
 
 while True:
 
@@ -14,11 +19,19 @@ while True:
     print("Subtraction(-)")
     print("Division(/)")
     print("Multiplication(*)")
-
-    Choice = input("Enter Operator: ")
-       
-
-    num2 = float(input("Enter another number: "))
+    while True:
+            Choice = input("Enter Operator: ")
+            if Choice in ['+', '-', '*', '/']:
+                break
+            else:
+                print("Invalid operator! Please enter +, -, *, or /")
+    
+    while True:
+        try:
+            num2 = float(input("Enter another number: "))
+            break
+        except ValueError:
+            print("Wrong input. Enter another number")
 
 
     def calculate(num1, Choice, num2):
