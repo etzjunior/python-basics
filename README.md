@@ -12,3 +12,9 @@ It includes daily practice exercises, LeetCode solutions, and mini-projects I co
 - **Mini Projects:** Small Python scripts (like a calculator app, number guesser, etc.)  
 - **Notes:** Key Python concepts and examples for quick reference  
 
+## Week 1 Summary
+- Refreshed Python basics (variables, loops, conditionals, lists)
+- Built a simple calculator project
+- Pushed projects to GitHub
+
+
