@@ -10,17 +10,29 @@ def add_student():
 
 
 def view_students():
-    if not students:
-        print("No students available.\n")
+    if not students:        # checks if the students dictionary is empty
+        print("No students available.\n")    
+        return
     else:
         print("--- Student List ---")
         for name, grade in students.items():
             print(f"{name}: {grade}")
 
+def show_stats():    # shows highest, lowest and average grades
+    if not students:
+        print ("No Students Available!")
+        return
+    
+    highest = max(students, key=students.get) 
+    lowest = min(students, key=students.get)
+    average = sum(students.values())/len(students)
 
-print("Current students dictionary:")
-print(students)
+    print("---Student Stats---")
+    print(f"Highest: {highest} ({students[highest]})")
+    print(f"Lowest: {lowest} ({students[lowest]})")
+    print(f"Average: {average}")
 
 add_student()
 add_student()
 view_students()
+show_stats()
