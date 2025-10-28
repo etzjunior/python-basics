@@ -34,7 +34,7 @@ def show_stats():    # shows highest, lowest and average grades
 
 
 def update_students():
-    name = input("Enter student mane to update: ").strip()
+    name = input("Enter student name to update: ").strip()
     if name in students:
         new_grade = float(input("Enter new grade: "))
         students[name] = new_grade
@@ -50,9 +50,28 @@ def delete_student():
     else:
         print(f"{name} not found in the student list.")
 
-add_student()
-add_student()
-view_students()
-show_stats()
-update_students()
-delete_student()
+print("1. Add Students")
+print("2. View Students")
+print("3. Show Stats")
+print("4. Update Students")
+print("5. Delete Students")
+print("6. Exit")
+
+Choice = input("Enter your choice (1-6): ")
+
+if Choice == "1":
+    add_student()
+elif Choice == "2":
+    view_students()
+elif Choice == "3":
+    show_stats()
+elif Choice == "4":
+    update_students()
+elif Choice == "5":
+    delete_student()
+elif Choice == "6":
+    print("Exiting the program.")
+else:
+    print("Invalid choice. Please enter a number between 1 and 6.")
+
+
