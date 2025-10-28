@@ -32,7 +32,27 @@ def show_stats():    # shows highest, lowest and average grades
     print(f"Lowest: {lowest} ({students[lowest]})")
     print(f"Average: {average}")
 
+
+def update_students():
+    name = input("Enter student mane to update: ").strip()
+    if name in students:
+        new_grade = float(input("Enter new grade: "))
+        students[name] = new_grade
+        print(f"{name}'s grade updated successfully!\n")
+    else:
+        print(f"{name} not found in the student list.\n")
+
+def delete_student():
+    name = input("Enter student name to delete: ").strip()
+    if name in students:
+        del students[name]
+        print(f"{name} deleted successfully!\n")
+    else:
+        print(f"{name} not found in the student list.")
+
 add_student()
 add_student()
 view_students()
 show_stats()
+update_students()
+delete_student()
