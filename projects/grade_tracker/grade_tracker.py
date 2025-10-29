@@ -1,4 +1,18 @@
+import json
+
 students = {} # dictionary to store students infos
+
+def load_students():
+    try:
+        with open('students.json', 'r') as file:
+            students = json.load(file)
+    except FileNotFoundError:
+        students = {}
+
+def save_students():
+    with open('students.json', 'w') as file:
+        json.dump(students, file)
+
 
 def add_student():
     # requests student names and grades from user
