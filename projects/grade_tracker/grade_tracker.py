@@ -3,6 +3,7 @@ import json
 students = {} # dictionary to store students infos
 
 def load_students():
+    global students
     try:
         with open('students.json', 'r') as file:
             students = json.load(file)
@@ -10,9 +11,12 @@ def load_students():
         students = {}
 
 def save_students():
+    global students
     with open('students.json', 'w') as file:
-        json.dump(students, file)
+        json.dump(students, file, indent=4)
 
+
+load_students() # load existing student data from file
 
 def add_student():
     # requests student names and grades from user
@@ -20,6 +24,7 @@ def add_student():
     grades = float(input("Enter Student Grades: "))
 
     students[names] = grades # adds student name and grades to the dictionary
+    save_students() # saves updated student data to file
     print(f"{names} added successfully!\n")
 
 
@@ -52,6 +57,7 @@ def update_students():
     if name in students:
         new_grade = float(input("Enter new grade: "))
         students[name] = new_grade
+        save_students()
         print(f"{name}'s grade updated successfully!\n")
     else:
         print(f"{name} not found in the student list.\n")
@@ -60,32 +66,34 @@ def delete_student():
     name = input("Enter student name to delete: ").strip()
     if name in students:
         del students[name]
+        save_students()
         print(f"{name} deleted successfully!\n")
     else:
         print(f"{name} not found in the student list.")
 
-print("1. Add Students")
-print("2. View Students")
-print("3. Show Stats")
-print("4. Update Students")
-print("5. Delete Students")
-print("6. Exit")
+while True:
+    print("1. Add Students")
+    print("2. View Students")
+    print("3. Show Stats")
+    print("4. Update Students")
+    print("5. Delete Students")
+    print("6. Exit")
 
-Choice = input("Enter your choice (1-6): ")
+    Choice = input("Enter your choice (1-6): ")
 
-if Choice == "1":
-    add_student()
-elif Choice == "2":
-    view_students()
-elif Choice == "3":
-    show_stats()
-elif Choice == "4":
-    update_students()
-elif Choice == "5":
-    delete_student()
-elif Choice == "6":
-    print("Exiting the program.")
-else:
-    print("Invalid choice. Please enter a number between 1 and 6.")
+    if Choice == "1":
+        add_student()
+    elif Choice == "2":
+        view_students()
+    elif Choice == "3":
+        show_stats()
+    elif Choice == "4":
+        update_students()
+    elif Choice == "5":
+        delete_student()
+    elif Choice == "6":
+        print("Exiting the program.")
+    else:
+        print("Invalid choice. Please enter a number between 1 and 6.")
 
 
