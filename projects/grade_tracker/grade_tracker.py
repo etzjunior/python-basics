@@ -20,8 +20,22 @@ load_students() # load existing student data from file
 
 def add_student():
     # requests student names and grades from user
-    names = input("Enter Student Name: ")
-    grades = float(input("Enter Student Grades: "))
+    names = input("Enter Student Name: ").strip()
+
+    if not names:
+        print("Student name cannot be empty.\n")
+        return
+    if names in students:
+        print(f"{names} already exists. Use update option to change the grade.\n")
+        return
+    try:
+        grades = float(input("Enter Student Grade (0–100): "))
+        if grades < 0 or grades > 100:
+            print("Grade must be between 0 and 100.\n")
+            return
+    except ValueError:
+        print("Invalid grade. Please enter a numeric value.\n")
+        return
 
     students[names] = grades # adds student name and grades to the dictionary
     save_students() # saves updated student data to file
@@ -54,13 +68,21 @@ def show_stats():    # shows highest, lowest and average grades
 
 def update_students():
     name = input("Enter student name to update: ").strip()
-    if name in students:
-        new_grade = float(input("Enter new grade: "))
-        students[name] = new_grade
-        save_students()
-        print(f"{name}'s grade updated successfully!\n")
-    else:
+    if name not in students:
         print(f"{name} not found in the student list.\n")
+        return
+    try:
+        new_grade = float(input("Enter new grade (0–100): "))
+        if new_grade < 0 or new_grade > 100:
+            print("Grade must be between 0 and 100.\n")
+            return
+    except ValueError:
+        print("Invalid grade. Please enter a numeric value.\n")
+        return
+    students[name] = new_grade
+    save_students()
+    print(f"{name}'s grade updated successfully!\n")
+ 
 
 def delete_student():
     name = input("Enter student name to delete: ").strip()
