@@ -15,6 +15,17 @@ def save_students():
     with open('students.json', 'w') as file:
         json.dump(students, file, indent=4)
 
+def get_letter_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
 
 load_students() # load existing student data from file
 
@@ -49,7 +60,8 @@ def view_students():
     else:
         print("--- Student List ---")
         for name, grade in students.items():
-            print(f"{name}: {grade}")
+            letter = get_letter_grade(grade)
+            print(f"{name}: {grade} ({letter})")
 
 def show_stats():    # shows highest, lowest and average grades
     if not students:
@@ -66,7 +78,7 @@ def show_stats():    # shows highest, lowest and average grades
     print(f"Average: {average}")
 
 
-def update_students():
+def update_students():   # updates a student's grade
     name = input("Enter student name to update: ").strip()
     if name not in students:
         print(f"{name} not found in the student list.\n")
@@ -84,7 +96,7 @@ def update_students():
     print(f"{name}'s grade updated successfully!\n")
  
 
-def delete_student():
+def delete_student():   # deletes a student from the dictionary
     name = input("Enter student name to delete: ").strip()
     if name in students:
         del students[name]
@@ -93,7 +105,7 @@ def delete_student():
     else:
         print(f"{name} not found in the student list.")
 
-while True:
+while True:    # main menu loop
     print("1. Add Students")
     print("2. View Students")
     print("3. Show Stats")
@@ -101,7 +113,7 @@ while True:
     print("5. Delete Students")
     print("6. Exit")
 
-    Choice = input("Enter your choice (1-6): ")
+    Choice = input("Enter your choice (1-6): ") # gets user choice
 
     if Choice == "1":
         add_student()
