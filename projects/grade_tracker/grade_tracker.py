@@ -105,15 +105,34 @@ def delete_student():   # deletes a student from the dictionary
     else:
         print(f"{name} not found in the student list.")
 
+
+def search_students():   # searches for students by name
+    query = input("Enter student name to search:").strip().lower()
+    if not query:
+        print("Search query cannot be empty.")
+        return
+    
+    results = {name: grade for name, grade in students.items() if query in name.lower()}
+
+    if results:
+        print("--- Search Results ---")
+        for name,grade in results.items():
+            letter = get_letter_grade(grade)
+            print(f"{name}: {grade} ({letter})")
+    else:
+        print("No matching students found.")
+
+
 while True:    # main menu loop
     print("1. Add Students")
     print("2. View Students")
     print("3. Show Stats")
     print("4. Update Students")
     print("5. Delete Students")
-    print("6. Exit")
+    print("6. Search Students")
+    print("7. Exit")
 
-    Choice = input("Enter your choice (1-6): ") # gets user choice
+    Choice = input("Enter your choice (1-7): ") # gets user choice
 
     if Choice == "1":
         add_student()
@@ -126,8 +145,14 @@ while True:    # main menu loop
     elif Choice == "5":
         delete_student()
     elif Choice == "6":
+        search_students()
+    elif Choice == "7":
         print("Exiting the program.")
+        break
     else:
         print("Invalid choice. Please enter a number between 1 and 6.")
+
+
+
 
 
