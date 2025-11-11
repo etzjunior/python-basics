@@ -1,4 +1,5 @@
 import json
+import csv
 
 students = {} # dictionary to store students infos
 
@@ -61,7 +62,7 @@ def view_students():
         print("--- Student List ---")
         for name, grade in students.items():
             letter = get_letter_grade(grade)
-            print(f"{name}: {grade} ({letter})")
+            print(f"{name}: {grade}({letter})")
 
 def show_stats():    # shows highest, lowest and average grades
     if not students:
@@ -118,11 +119,11 @@ def search_students():   # searches for students by name
         print("--- Search Results ---")
         for name,grade in results.items():
             letter = get_letter_grade(grade)
-            print(f"{name}: {grade} ({letter})")
+            print(f"{name}: {grade}({letter})")
     else:
         print("No matching students found.")
 
-def sort_students():
+def sort_students():  # sorts students by name or grade
     if not students:
         print("No students available to sort.")
         return
@@ -141,9 +142,22 @@ def sort_students():
     print("--- Sorted Students ---")
     for name, grade in sorted_list:
         letter = get_letter_grade(grade)
-        print(f"{name}: {grade} ({letter})")
+        print(f"{name}: {grade}({letter})")
     print()
     
+def export_to_csv():  # exports student data to a CSV file
+    if not students:
+        print("No students available to export.")
+        return
+    filename = "students.csv"
+
+    with open(filename, 'w', newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Name", "Grade", "Letter Grade"])
+        for name, grade in students.items():
+            letter = get_letter_grade(grade)
+            writer.writerow([name, grade, letter])
+    print(f"Students data successfully exported to {filename}\n")
 
 
 while True:    # main menu loop
@@ -154,9 +168,10 @@ while True:    # main menu loop
     print("5. Delete Students")
     print("6. Search Students")
     print("7. Sort Students")
-    print("8. Exit")
+    print("8. Export to CSV")
+    print("9. Exit")
 
-    Choice = input("Enter your choice (1-8): ") # gets user choice
+    Choice = input("Enter your choice (1-9): ") # gets user choice
 
     if Choice == "1":
         add_student()
@@ -173,6 +188,8 @@ while True:    # main menu loop
     elif Choice == "7":
         sort_students()
     elif Choice == "8":
+        export_to_csv()
+    elif Choice == "9":
         print("Exiting the program.")
         break
     else:
