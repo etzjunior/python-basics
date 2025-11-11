@@ -122,6 +122,29 @@ def search_students():   # searches for students by name
     else:
         print("No matching students found.")
 
+def sort_students():
+    if not students:
+        print("No students available to sort.")
+        return
+    print("Sorting options:")
+    print("1. Sort by Name (A-Z)")
+    print("2. Sort by Grade (High to Low)")
+
+    choice = input("Enter your choice (1-2):").strip()
+    if choice == "1":
+        sorted_list = sorted(students.items())
+    elif choice =="2":
+        sorted_list = sorted(students.items(), key=lambda x: x[1], reverse=True)
+    else:
+        print("Invalid choice, please enter 1 or 2.\n")
+        return
+    print("--- Sorted Students ---")
+    for name, grade in sorted_list:
+        letter = get_letter_grade(grade)
+        print(f"{name}: {grade} ({letter})")
+    print()
+    
+
 
 while True:    # main menu loop
     print("1. Add Students")
@@ -130,9 +153,10 @@ while True:    # main menu loop
     print("4. Update Students")
     print("5. Delete Students")
     print("6. Search Students")
-    print("7. Exit")
+    print("7. Sort Students")
+    print("8. Exit")
 
-    Choice = input("Enter your choice (1-7): ") # gets user choice
+    Choice = input("Enter your choice (1-8): ") # gets user choice
 
     if Choice == "1":
         add_student()
@@ -147,6 +171,8 @@ while True:    # main menu loop
     elif Choice == "6":
         search_students()
     elif Choice == "7":
+        sort_students()
+    elif Choice == "8":
         print("Exiting the program.")
         break
     else:
