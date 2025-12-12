@@ -53,7 +53,9 @@ def view_weather_history():
     print("1. View all records")
     print("2. Filter by city")
     print("3. Filter by date (YYYY-MM-DD)")
+    print("4. Filter by temperature")
     choice = input("Choose an option: ")
+
 
     if choice == "1":
         print("\n--- All Weather Records ---")
@@ -83,6 +85,39 @@ def view_weather_history():
             print("\nNo matching records.\n")
         else:
             print("\n--- Filtered by Date ---")
+            for row in filtered:
+                print(row)
+        print()
+        return
+    
+    elif choice == "4": # Filter by temperature
+        try:
+            threshold = float(input("Enter temperature value (°C): "))
+        except ValueError:
+            print("\nInvalid number.\n")
+            return
+        
+        print("\nChoose filter type:")
+        print("1. Greater than")
+        print("2. Less than")
+        print("3. Equal to")
+
+        filter_type = input("Enter option: ")
+
+        if filter_type == "1":
+            filtered = [row for row in rows if float(row[1]) > threshold]
+        elif filter_type == "2":
+            filtered = [row for row in rows if float(row[1]) < threshold]
+        elif filter_type == "3":
+            filtered = [row for row in rows if float(row[1]) == threshold]
+        else:
+            print("\nInvalid option.\n")
+            return
+
+        if not filtered:
+            print("\nNo matching records.\n")
+        else:
+            print("\n--- Filtered by Temperature ---")
             for row in filtered:
                 print(row)
         print()
