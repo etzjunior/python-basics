@@ -1,5 +1,6 @@
 import requests
 import csv
+import json
 from datetime import datetime
 
 
@@ -54,6 +55,7 @@ def view_weather_history():
     print("2. Filter by city")
     print("3. Filter by date (YYYY-MM-DD)")
     print("4. Filter by temperature")
+    print("5. Export history to JSON")
     choice = input("Choose an option: ")
 
 
@@ -121,6 +123,22 @@ def view_weather_history():
             for row in filtered:
                 print(row)
         print()
+        return
+    elif choice == "5":
+        output = []
+        for row in rows:
+            output.append({
+                "city": row[0],
+                "temperature": float(row[1]),
+                "feels_like": float(row[2]),
+                "description": row[3],
+                "time": row[4]
+            })
+
+        with open("weather_history.json", "w") as f:
+            json.dump(output, f, indent=4)
+
+        print("\nHistory exported to weather_history.json\n")
         return
 
     else:
