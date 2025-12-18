@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contact</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% extends "base.html" %}
 
-</head>
-<body>
-    <h1>Contact</h1>
-    <p>Email: Victorwoha233@gmail.com</p>
-
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-</body>
-</html>
+{% block content %}
+<h1>Contact</h1>
+<p>Email: Victorwoha233@gmail.com</p>
+{% endblock %}

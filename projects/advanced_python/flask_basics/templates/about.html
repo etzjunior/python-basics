@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>About</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% extends "base.html" %}
 
-</head>
-<body>
-    <h1>About Me</h1>
-    <p>This website is built with Flask.</p>
-
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-</body>
-</html>
+{% block content %}
+<h1>About</h1>
+<p>This page tells you about me.</p>
+{% endblock %}
